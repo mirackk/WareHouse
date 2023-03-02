@@ -1,13 +1,22 @@
-import axios from "axios";
-const handleGetItems = async () => {
-    try {
-      const response = await axios.get(
-        "https://crud-testtest.azurewebsites.net/api/get-item?code=8pl3Kg1LqASrOCfl-6LFJ1tRlH2mpC4fGKW3VSYQ66BFAzFuqwcmMA=="
-      );
-      setItems(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+const { DefaultAzureCredential } = require("@azure/identity");
+const { SecretClient } = require("@azure/keyvault-secrets");
 
-handleGetItems()
+export const te=async()=>{
+    // Initialize a DefaultAzureCredential instance with the Managed Identity credentials
+    const credential = new DefaultAzureCredential();
+
+    // Create a SecretClient instance for the Key Vault
+    const vaultName = "apikeyTaoyu";
+    const url = "https://apikeytaoyu.vault.azure.net/";
+    const client = new SecretClient(url, credential);
+
+    // Get the Azure Function host key secret from the Key Vault
+    const secretName = "crudkey";
+    const secret = await client.getSecret(secretName);
+
+    // Extract the host key value from the secret
+    const hostKey = secret.value;
+    console.log(hostKey)
+}
+
+
