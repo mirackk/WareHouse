@@ -17,6 +17,8 @@ function App() {
 
   const [key,setKey] = useState("");
 
+  const vaultKey = process.env.keyvaultsecret
+
   const handleHouseIdChange = (event) => {
     setHouseId(event.target.value);
   };
@@ -27,10 +29,11 @@ function App() {
 
   const handleGetItems = async () => {
     try {
+      console.log(vaultKey)
       const tmp = "8pl3Kg1LqASrOCfl-6LFJ1tRlH2mpC4fGKW3VSYQ66BFAzFuqwcmMA=="
       const response = await axios.get(
         "https://crud-testtest.azurewebsites.net/api/get-item",
-        {headers:{"x-functions-key":tmp}}
+        {headers:{"x-functions-key":vaultKey}}
       );
       
       console.log(response)
