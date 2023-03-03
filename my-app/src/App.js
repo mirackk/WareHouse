@@ -4,20 +4,25 @@ import { Select, Typography,MenuItem } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import DataTable ,{updateRows} from "./component/table";
 
-import { DefaultAzureCredential, InteractiveBrowserCredential } from "@azure/identity";
-import { SecretClient } from "@azure/keyvault-secrets";
+// require('dotenv').config()
+// console.log(process.env.test) 
+// import { DefaultAzureCredential, InteractiveBrowserCredential } from "@azure/identity";
+// import { SecretClient } from "@azure/keyvault-secrets";
 //import te from "./test"
 
 function App() {
   const [houseId, setHouseId] = useState("");
   const [date, setDate] = useState("");
+  const [shipmentID,setShipmentID] = useState("")
   const [items, setItems] = useState([]);
 
   const [tableRows,setTableRows] = useState([]);
 
   const [key,setKey] = useState("");
 
-  const vaultKey = process.env.keyvaultsecret
+  const vaultKey = process.env.REACT_APP_KEY
+
+  const apiUrl = "https://crud-testtest.azurewebsites.net/api/"
 
   const handleHouseIdChange = (event) => {
     setHouseId(event.target.value);
@@ -27,16 +32,20 @@ function App() {
     setDate(event.target.value);
   };
 
+  const handleShipmentIDChange = (event) => {
+    setShipmentID(event.target.value)
+  }
+
   const handleGetItems = async () => {
     try {
-      console.log(vaultKey)
-      const tmp = "8pl3Kg1LqASrOCfl-6LFJ1tRlH2mpC4fGKW3VSYQ66BFAzFuqwcmMA=="
+      //console.log(process.env)
+      //const tmp = "8pl3Kg1LqASrOCfl-6LFJ1tRlH2mpC4fGKW3VSYQ66BFAzFuqwcmMA=="
       const response = await axios.get(
-        "https://crud-testtest.azurewebsites.net/api/get-item",
-        {headers:{"x-functions-key":vaultKey}}
+        apiUrl+"get-item",
+        {headers:{"x-functions-key":process.env.REACT_APP_TMP}}
       );
       
-      console.log(response)
+      //console.log(response)
       setItems(response.data);
     } catch (error) {
       console.error(error);
@@ -55,8 +64,12 @@ function App() {
 
   const handleGetItemsByDate = async () => {
     try {
+        console.log(date)
       const response = await axios.get(
-        `https://<your-azure-function-app-name>.azurewebsites.net/api/get-item-by-date?date=${date}`
+        apiUrl+"report/"+date+"?",
+        {   
+            headers:{"x-functions-key":process.env.REACT_APP_KEY},
+        }
       );
       setItems(response.data);
     } catch (error) {
@@ -64,20 +77,48 @@ function App() {
     }
   };
 
-  const handleInsertData = async () => {
+  const handleGetItemsByHouseID = async () => {
     try {
-      const response = await axios.post(
-        `https://<your-azure-function-app-name>.azurewebsites.net/api/insert-data`,
-        {
-          houseId: houseId,
-          date: date,
+      const response = await axios.get(
+        apiUrl+"report1/"+houseId+"?",
+        {   
+            headers:{"x-functions-key":process.env.REACT_APP_KEY},
         }
       );
-      console.log(response.data);
+      setItems(response.data);
     } catch (error) {
       console.error(error);
     }
   };
+
+  const handleGetItemsByShipmentID = async () => {
+    try {
+      const response = await axios.get(
+        apiUrl+"report2/"+shipmentID+"?",
+        {   
+            headers:{"x-functions-key":process.env.REACT_APP_KEY},
+        }
+      );
+      setItems(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+//   const handleInsertData = async () => {
+//     try {
+//       const response = await axios.post(
+//         `https://<your-azure-function-app-name>.azurewebsites.net/api/insert-data`,
+//         {
+//           houseId: houseId,
+//           date: date,
+//         }
+//       );
+//       console.log(response.data);
+//     } catch (error) {
+//       console.error(error);
+//     }
+//   };
 
   const updateTable = async()=>{
     var tmpRows =[];
@@ -96,35 +137,6 @@ function App() {
     //console.log(tmpRows);
     setTableRows(tmpRows);
   };
-
-//   const getFunctionKey = async()=>{
-//     // Initialize a DefaultAzureCredential instance with the Managed Identity credentials
-//     const credential = new DefaultAzureCredential();
-//     // const credential = new InteractiveBrowserCredential({
-//     //     tenantId: "d57d32cc-c121-488f-b07b-dfe705680c71",
-//     //     redirectUri: window.location.origin,
-//     //   });
-
-//     // Create a SecretClient instance for the Key Vault
-//     const vaultName = "apikeyTaoyu";
-//     const myUrl = "https://apikeytaoyu.vault.azure.net/";
-//     const client = new SecretClient(myUrl, credential);
-
-//     // Get the Azure Function host key secret from the Key Vault
-//     const secretName = "crudkey";
-//     const secret = await client.getSecret(secretName);
-
-//     // Extract the host key value from the secret
-//     const hostKey = secret.value;
-//     console.log(hostKey)
-//     setKey(hostKey)
-//   }
-
-//   useEffect(()=>{
-//     console.log("hi")
-//     getFunctionKey()
-//     //console.log(key)
-//   },[]);
 
   useEffect(()=>{
     updateTable()
@@ -147,17 +159,19 @@ function App() {
         <button onClick={handleGetItems}>Get All Reports</button>
       </div>
       <div>
-        <label>House ID:</label>
-        <input type="text" value={houseId} onChange={handleHouseIdChange} />
-        <button onClick={handleGetItems}>Get Items</button>
-      </div>
-      <div>
         <label>Date:</label>
         <input type="text" value={date} onChange={handleDateChange} />
-        <button onClick={handleGetItemsByDate}>Get Items by Date</button>
+        <button onClick={handleGetItemsByDate}>Get Reports</button>
       </div>
       <div>
-        <button onClick={handleInsertData}>Insert Data</button>
+        <label>Warehouse ID:</label>
+        <input type="text" value={houseId} onChange={handleHouseIdChange} />
+        <button onClick={handleGetItemsByHouseID}>Get Reports</button>
+      </div>
+      <div>
+        <label>Shipment ID:</label>
+        <input type="text" value={shipmentID} onChange={handleShipmentIDChange} />
+        <button onClick={handleGetItemsByShipmentID}>Get Reports</button>
       </div>
       <ul>
         {/* {items.map((item) => (
