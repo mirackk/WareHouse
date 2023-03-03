@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/29033f64-ce42-402d-b71f-d0a327c81c0a/resourceGroups/TaoyuChenAss4/providers/Microsoft.Web/sites/taoyuChenAss4",
+    "appService.deploySubpath": "my-app"
+}
