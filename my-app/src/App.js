@@ -41,8 +41,8 @@ function App() {
       //console.log(process.env)
       //const tmp = "8pl3Kg1LqASrOCfl-6LFJ1tRlH2mpC4fGKW3VSYQ66BFAzFuqwcmMA=="
       const response = await axios.get(
-        apiUrl+"get-item",
-        {headers:{"x-functions-key":process.env.REACT_APP_TMP}}
+        apiUrl+"reports",
+        {headers:{"x-functions-key":process.env.REACT_APP_KEY}}
       );
       
       //console.log(response)
@@ -66,7 +66,7 @@ function App() {
     try {
         console.log(date)
       const response = await axios.get(
-        apiUrl+"report/"+date+"?",
+        apiUrl+"reportByDate/"+date+"?",
         {   
             headers:{"x-functions-key":process.env.REACT_APP_KEY},
         }
@@ -80,7 +80,7 @@ function App() {
   const handleGetItemsByHouseID = async () => {
     try {
       const response = await axios.get(
-        apiUrl+"report1/"+houseId+"?",
+        apiUrl+"reportByHouseID/"+houseId+"?",
         {   
             headers:{"x-functions-key":process.env.REACT_APP_KEY},
         }
@@ -93,8 +93,9 @@ function App() {
 
   const handleGetItemsByShipmentID = async () => {
     try {
+
       const response = await axios.get(
-        apiUrl+"report2/"+shipmentID+"?",
+        apiUrl+"reportByShipmentID/"+shipmentID+"?",
         {   
             headers:{"x-functions-key":process.env.REACT_APP_KEY},
         }
