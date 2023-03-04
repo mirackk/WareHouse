@@ -1,0 +1,195 @@
+openapi: 3.0.3
+info:
+  title: Warehouse Api By Taoyu Chen
+  description: |-
+    This is a api document of Taoyu Chen for assignment4 in CS519 boston university.
+    Be careful that this api is only used for document, which means it is just a YAML file and has no actully access to database without the x-functions-key
+  termsOfService: http://swagger.io/terms/
+  contact:
+    email: apiteam@swagger.io
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+  - url: https://crud-testtest.azurewebsites.net/api/
+
+
+tags:
+  - name: warehouse
+    description: Everything about azure functions
+    # externalDocs:
+    #   description: Find out more
+    #   url: http://swagger.io
+    
+
+paths:
+  /reports?:
+    get:
+      tags:
+        - warehouse
+      summary: Get reports
+      operationId: getReports
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reports'
+      security:
+        - api_key: []
+  /reportByDate/{Date}:
+    get:
+      tags:
+        - warehouse
+      summary: Get reports by date
+      operationId: getReportsByDate
+      parameters:
+        - name: Date
+          in: path
+          description: date to find reports (mm-dd-yyyy)
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reports'
+        '401':
+          description: Unauthorized
+      security:
+        - api_key: []
+  
+  /reportByHouseID/{WarehouseID}:
+    get:
+      tags:
+        - warehouse
+      summary: Get reports by warehouseID
+      operationId: getReportsByHouseID
+      parameters:
+        - name: WarehouseID
+          in: path
+          description: houseId (0e219dfd-7961-4607-a6c7-2ed48fe4c58f)
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reports'
+        '401':
+          description: Unauthorized
+      security:
+        - api_key: []
+  
+  /reportByShipmentID/{shipmentId}:
+    get:
+      tags:
+        - warehouse
+      summary: Get reports by ShipmentID
+      operationId: getReportsByShipmentID
+      parameters:
+        - name: shipmentId
+          in: path
+          description: shipmentId (like 1, 2 or 13)
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reports'
+        '401':
+          description: Unauthorized
+      security:
+        - api_key: []
+  
+  /initDatabase:
+    get:
+      tags:
+        - warehouse
+      summary: reset database
+      operationId: initdatabase
+      responses:
+        '200':
+          description: Successful operation
+        '401':
+          description: Unauthorized
+      security:
+        - api_key: []
+  
+  /insertData:
+    post:
+      tags:
+        - warehouse
+      summary: insert data
+      operationId: insertData
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Report'
+      responses:
+        '200':
+          description: Successful operation
+        '401':
+          description: Unauthorized
+      security:
+        - api_key: []
+  
+  
+      
+  
+components:
+  schemas:
+    Reports:
+      type: array
+      items:
+        type: object
+        properties:
+          _id:
+            type: string
+          Date:
+            type: string
+          WarehouseID:
+            type: string
+          ShippingPO:
+            type: string
+          ShipmentID:
+            type: string
+          BoxesRcvd:
+            type: string
+    Report:
+      type: array
+      items:
+        type: object
+        properties:
+          Date:
+            type: string
+          WarehouseID:
+            type: string
+          ShippingPO:
+            type: string
+          ShipmentID:
+            type: string
+          BoxesRcvd:
+            type: string
+    
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: x-functions-key
+      in: header
