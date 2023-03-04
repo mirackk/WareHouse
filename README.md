@@ -1,14 +1,15 @@
 # WareHouse
 React+Javascript+Swagger+Azure project
+Deploya at : https://taoyuchenass4.azurewebsites.net/
 
-#my-app
+# my-app
 The react app that works for frontend
 
-#api
+# api
 The api that connects azure database
 
-#azureSwagger.yaml
+# azureSwagger.yaml
 The swagger documents that shows how to use api
 
-#test
+# test
 Just my personal test codes. Do not use it
