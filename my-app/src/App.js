@@ -155,7 +155,7 @@ function App() {
 
   return (
     <div>
-      <h1>Warehouse by TaoyuChen</h1>
+      <h1>Warehouse by TaoyuChen Ver2.0</h1>
       <div>
         <button onClick={handleGetItems}>Get All Reports</button>
       </div>
