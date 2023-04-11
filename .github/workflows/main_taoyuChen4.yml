@@ -5,6 +5,9 @@ on:
     branches:
       - main
   workflow_dispatch:
+  
+env:
+  AZURE_WEBAPP_PACKAGE_PATH: 'my-app' # set this to the path to your web app project, in this case 'my-app'
 
 jobs:
   build:
@@ -21,7 +24,7 @@ jobs:
       - name: npm install, build, and test
         run: |
           export CI=false
-          cd my-app
+          cd ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
           npm install
           npm run build --if-present
           # npm run test 
@@ -30,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: node-app
-          path: my-app
+          path: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -52,4 +55,4 @@ jobs:
           app-name: 'taoyuChenAss4'
           slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE}}
-          package: ./my-app
+          package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
