@@ -3,6 +3,7 @@ import axios from "axios";
 import { Select, Typography,MenuItem } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import DataTable ,{updateRows} from "./component/table";
+import UploadImage from "./component/uploadImg";
 
 // require('dotenv').config()
 // console.log(process.env.test) 
@@ -106,21 +107,6 @@ function App() {
     }
   };
 
-//   const handleInsertData = async () => {
-//     try {
-//       const response = await axios.post(
-//         `https://<your-azure-function-app-name>.azurewebsites.net/api/insert-data`,
-//         {
-//           houseId: houseId,
-//           date: date,
-//         }
-//       );
-//       console.log(response.data);
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   };
-
   const updateTable = async()=>{
     var tmpRows =[];
     for(var item of items){
@@ -155,7 +141,7 @@ function App() {
 
   return (
     <div>
-      <h1>Warehouse by TaoyuChen Ver2.0</h1>
+      <h1>Warehouse by TaoyuChen Ver.Ass5</h1>
       <div>
         <button onClick={handleGetItems}>Get All Reports</button>
       </div>
@@ -182,6 +168,10 @@ function App() {
       <div>
         {/*get datatable*/}
         <DataTable/>
+      </div>
+      <h2>Function to upload images to azure</h2>
+      <div>
+        <UploadImage/>
       </div>
       
     </div>
