@@ -3,7 +3,7 @@ import axios from "axios";
 import { Select, Typography,MenuItem } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import DataTable ,{updateRows} from "./component/table";
-// import UploadImage from "./component/uploadImg";
+import UploadImage from "./component/uploadImg";
 
 // require('dotenv').config()
 // console.log(process.env.test) 
@@ -171,7 +171,7 @@ function App() {
       </div>
       <h2>Function to upload images to azure</h2>
       <div>
-        {/* <UploadImage/> */}
+        <UploadImage/>
       </div>
       
     </div>
