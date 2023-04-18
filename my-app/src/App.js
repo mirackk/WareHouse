@@ -171,7 +171,7 @@ function App() {
       </div>
       <h2>Function to upload images to azure</h2>
       <div>
-        <UploadImage/>
+        {/* <UploadImage/> */}
       </div>
       
     </div>
