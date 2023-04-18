@@ -50,14 +50,6 @@ async function extractProductInfo(imagePath) {
       sku: match[5],
       description: match[6],
     };
-    // const product = {
-    //     product: detections[0].description,
-    //     tagLine: detections[1].description,
-    //     price: parseFloat(detections[2].description),
-    //     size: detections[3].description,
-    //     SKU: detections[4].description,
-    //     description: detections[5].description
-    // };
 
     return productInfo;
   } catch (err) {
