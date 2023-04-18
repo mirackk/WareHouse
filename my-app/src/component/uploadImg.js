@@ -8,7 +8,7 @@ const connectionStr = process.env.REACT_APP_CONNECTIONSTR
 const blobImg = "img";
 const myqueue = "ocrqueue";
 
-const UploadImage = () => {
+export default function UploadImage (){
     const [file, setFile] = useState(null);
 
     const handleFileChange = (event) => {
@@ -50,5 +50,3 @@ const UploadImage = () => {
         </div>
     );
 };
-
-export default UploadImage;  

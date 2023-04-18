@@ -15,7 +15,6 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.3.4",
-    "azure-storage": "^2.10.7",
     "buffer": "^6.0.3",
     "dotenv": "^16.0.3",
     "dotenv-webpack": "^8.0.1",
