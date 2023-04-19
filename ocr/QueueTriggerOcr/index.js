@@ -20,19 +20,21 @@ module.exports = async function (context, myQueueItem) {
 
     const [result] = await visionClient.textDetection(imageBuffer);
     const detections = result.textAnnotations;
+    const text = detections[0].description;
+
+    // Extract product info using regex
+    const regex = /^Product: (.+)\nTag line: (.+)\nPrice: (.+)\nSize: (.+)\nSKU: (.+)\nDescription: (.+)$/s;
+    const match = text.match(regex);
 
     // Process text annotations to extract the required fields
     const productData = {
-        Product: '', // Extract from detections
-        Tagline: '', // Extract from detections
-        Price: 0, // Extract from detections
-        Size: '', // Extract from detections
-        SKU: '', // Extract from detections
-        Description: '' // Extract from detections
+        name: match[1],
+        tagline: match[2],
+        price: match[3],
+        size: match[4],
+        sku: match[5],
+        description: match[6],
     };
-
-    // Add your logic to extract required fields from text annotations
-    // ...
 
     try {
         await mongoClient.connect();

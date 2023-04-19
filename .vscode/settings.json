@@ -3,8 +3,8 @@
         "node_modules{,/**}",
         ".vscode{,/**}"
     ],
-    "appService.defaultWebAppToDeploy": "/subscriptions/29033f64-ce42-402d-b71f-d0a327c81c0a/resourceGroups/TaoyuChenAss4/providers/Microsoft.Web/sites/taoyuChenAss4",
-    "appService.deploySubpath": "my-app",
+    "appService.defaultWebAppToDeploy": "",
+    "appService.deploySubpath": "new-app",
     "azureFunctions.deploySubpath": "ocr",
     "azureFunctions.postDeployTask": "npm install (functions)",
     "azureFunctions.projectLanguage": "JavaScript",
