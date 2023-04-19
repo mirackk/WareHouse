@@ -3,8 +3,8 @@ import { BlobServiceClient } from '@azure/storage-blob';
 import { QueueServiceClient } from '@azure/storage-queue';
 import { Buffer } from 'buffer';
 
-// const connectionStr = process.env.REACT_APP_CONNECTIONSTR
-const connectionStr = "BlobEndpoint=https://queuestoragetaoyu.blob.core.windows.net/;QueueEndpoint=https://queuestoragetaoyu.queue.core.windows.net/;FileEndpoint=https://queuestoragetaoyu.file.core.windows.net/;TableEndpoint=https://queuestoragetaoyu.table.core.windows.net/;SharedAccessSignature=sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-06-01T05:46:12Z&st=2023-04-17T21:46:12Z&spr=https&sig=0Uy2YwtB2r%2Fu62Ay%2FlBZzfXfEBWCKVHBS0TqA6oaqL4%3D"
+const connectionStr = process.env.REACT_APP_CONNECTIONSTR
+
 const blobImg = "img";
 const myqueue = "ocrqueue";
 
