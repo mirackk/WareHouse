@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
   
 env:
-  AZURE_WEBAPP_PACKAGE_PATH: 'my-app' # set this to the path to your web app project, in this case 'my-app'
+  AZURE_WEBAPP_PACKAGE_PATH: 'new-app' # set this to the path to your web app project, in this case 'my-app'
 
 jobs:
   build:
@@ -56,7 +56,7 @@ jobs:
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'taoyuChenAss4'
-          # slot-name: 'production'
+          app-name: 'warehousetaoyu'
+          slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE}}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
