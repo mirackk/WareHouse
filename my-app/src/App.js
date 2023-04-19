@@ -3,7 +3,7 @@ import axios from "axios";
 import { Select, Typography,MenuItem } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import DataTable ,{updateRows} from "./component/table";
-import UploadImage from "./component/uploadImg";
+import UploadImage from "./component/upload";
 
 // require('dotenv').config()
 // console.log(process.env.test) 
@@ -141,7 +141,7 @@ function App() {
 
   return (
     <div>
-      <h1>Warehouse by TaoyuChen Ver.Ass5 Test</h1>
+      <h1>Warehouse by TaoyuChen Ver.Ass5 New</h1>
       <div>
         <button onClick={handleGetItems}>Get All Reports</button>
       </div>
