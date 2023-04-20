@@ -17,8 +17,7 @@ const tmpkey = {
   }
 
 async function getClient() {
-    const keyFilename = '/Users/mirackchan/Downloads/mirackcompetitionmeta-ca3eba2def25.json';
-    const privateKey = fs.readFileSync(keyFilename);
+
     const client = new ImageAnnotatorClient({
       credentials: tmpkey
     });
