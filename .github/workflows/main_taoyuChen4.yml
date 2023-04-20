@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'new-app/**'
   workflow_dispatch:
   
 env:
