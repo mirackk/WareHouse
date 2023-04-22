@@ -3,11 +3,10 @@ const { ImageAnnotatorClient } = require('@google-cloud/vision');
 const { MongoClient } = require('mongodb');
 
 // for blob
-const connectionString = process.env.connectionStr
-//const connectionString=process.env.connectionStr
+const connectionString=process.env.connectionStr
 const blobContainerName = 'img';
 // for db
-const mongoUrl = "mongodb://mongo-taoyu:jRyAUGutPpPGYXsGT0DxvIEou4POVdVm6X3suBmFixBGJMomg7BLPkFlRepPQr6tlRiPEYjsMdfJACDbq1TSlQ==@mongo-taoyu.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@mongo-taoyu@";
+const mongoUrl = process.env.mongoUrl;
 const mongoClient = new MongoClient(mongoUrl);
 const dbName = 'Warehouse'; // Replace with your database name
 const collectionName = 'Products';
@@ -105,6 +104,3 @@ module.exports = async function (context, myQueueItem) {
     }
 
 };
-
-
-// "GOOGLE_APPLICATION_CREDENTIALS":{
